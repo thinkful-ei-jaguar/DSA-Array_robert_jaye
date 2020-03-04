@@ -1,4 +1,4 @@
-const  memory  = require('./memory')
+const  memory  = require('./Memory')
 const Memory= new memory();
 
 
@@ -6,6 +6,7 @@ class Array {
   constructor() {
       this.length = 0;
       this.ptr = Memory.allocate(this.length);
+      this._capacity = 0;
   }
   get(index) {
     if (index < 0 || index >= this.length) {
@@ -27,10 +28,14 @@ class Array {
     this.length++;
   }
   push(value) {
-    this._resize(this.length + 1);
+    if (this.length >= this._capacity) {
+        this._resize((this.length + 1) * Array.SIZE_RATIO);
+    }
+
     Memory.set(this.ptr + this.length, value);
     this.length++;
-  }
+}
+
   pop() {
     if (this.length == 0) {
         throw new Error('Index error');
@@ -54,8 +59,9 @@ class Array {
     }
     Memory.copy(this.ptr, oldPtr, this.length);
     Memory.free(oldPtr);
-  }
+    this._capacity = size;
+}
 
 }
-//Array.SIZE_RATIO = 3;
+Array.SIZE_RATIO = 3;
 module.exports = Array;
