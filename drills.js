@@ -1,11 +1,11 @@
-const Memory = require ("./memory");
+const Array = require ("./array");
 
 function main(){
 
-    Memory.SIZE_RATIO = 3;
+    Array.SIZE_RATIO = 3;
 
 
-    let arr = new Memory();
+    let arr = new Array();
     console.log(arr);
     arr.push(3);
 
