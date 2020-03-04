@@ -1,4 +1,6 @@
-const { Memory } = require('./memory')
+const  memory  = require('./memory')
+const Memory= new memory();
+
 
 class Array {
   constructor() {
@@ -55,5 +57,5 @@ class Array {
   }
 
 }
-Array.SIZE_RATIO = 3;
+//Array.SIZE_RATIO = 3;
 module.exports = Array;
